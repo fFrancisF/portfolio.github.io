@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adobe Portfolio</title>
+    <script>
+      // On page load, restore scroll position
+      window.onload = function () {
+        const scrollY = sessionStorage.getItem("scrollY");
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY, 10));
+          sessionStorage.removeItem("scrollY"); // optional cleanup
+        }
+      };
+
+      // Save scroll position before navigating
+      function saveScrollAndNavigate(href) {
+        sessionStorage.setItem("scrollY", window.scrollY);
+        window.location.href = href;
+      }
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        color: #e0e0e0;
+        background: #121212;
+        line-height: 1.6;
+        position: relative;
+        z-index: 0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("background.jpg") no-repeat center center fixed;
+        background-size: cover;
+        z-index: -2;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(18, 18, 18, 0.75); /* Darkness level */
+        z-index: -1;
+      }
+
+      header {
+        background-color: #1f1f1f;
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      header img {
+        max-width: 150px;
+        margin-bottom: 10px;
+      }
+
+      header h1 {
+        color: #ffffff;
+        font-size: 4rem;
+      }
+
+      .intro {
+        font-size: 1.2rem;
+        max-width: 1000px;
+        margin: 20px auto;
+        background: #2a2a2a;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      .business-case {
+        max-width: 1000px;
+        margin: 30px auto;
+        background: #f2f2f2;
+        color: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .business-case:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        background-color: #f9f9f9;
+      }
+
+      summary {
+        background-color: #dcdcdc;
+        padding: 15px 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        border-bottom: 1px solid #ccc;
+      }
+
+      details[open] summary {
+        background-color: #c0c0c0;
+      }
+
+      .case-content {
+        padding: 20px;
+        font-size: 1.2rem;
+      }
+
+      .case-content img {
+        max-width: 100%;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+
+      .case-content a {
+        display: inline-block;
+        margin-top: 10px;
+        color: #0077cc;
+        text-decoration: none;
+      }
+
+      .references {
+        font-size: 1.2rem;
+        max-width: 1000px;
+        margin: 40px auto;
+        background: #1e1e1e;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .references h2 {
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+
+      .indexed-references {
+        list-style: none;
+        counter-reset: ref;
+        padding-left: 0;
+      }
+
+      .indexed-references li {
+        counter-increment: ref;
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 30px;
+        color: #cccccc;
+      }
+
+      .indexed-references li::before {
+        content: "[" counter(ref) "] ";
+        position: absolute;
+        left: 0;
+        color: #888;
+        font-weight: bold;
+      }
+
+      a {
+        color: #00bfff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #1e90ff;
+        text-decoration: underline;
+      }
+
+      a:visited {
+        color: #8a2be2;
+      }
+
+      a:active {
+        color: #ff4500;
+      }
+
+      figure {
+        border: 1px #cccccc solid;
+        padding: 4px;
+        margin: auto;
+      }
+
+      figcaption {
+        background-color: black;
+        color: white;
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+      }
+
+      footer {
+        text-align: center;
+        margin: 40px 0;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Francis Fernandes</h1>
+      <p style="margin-top: 5px; font-size: 1.2rem; color: #aaa">
+        Technical Portfolio: Data Structures & Algorithms in Adobe Products
+      </p>
+    </header>
+
+    <section class="intro">
+      <h2>Introduction</h2>
+      <img
+        src="logo.jpg"
+        alt="Adobe Logo"
+        style="max-width: 300px; display: block; margin: 0 auto"
+      />
+      <p>
+        Adobe is a global leader in creative software, offering
+        industry-standard tools like Photoshop, Illustrator, Premiere Pro, and
+        Acrobat. These products rely heavily on efficient data structures and
+        algorithms to ensure real-time responsiveness, scalability, and user
+        interactivity. This portfolio explores core business cases from Adobe's
+        product line, focusing on algorithmic problem-solving and system design.
+      </p>
+    </section>
+
+    <br />
+    <br />
+    <br />
+    <!-- Business Cases Section -->
+    <h2 style="text-align: center; font-size: 2rem">
+      Business cases of Adobe products
+    </h2>
+
+    <details class="business-case">
+      <summary>
+        1. Fast Undo-Redo Implementation (All Creative Suite Apps)
+      </summary>
+      <div class="case-content">
+        <p>
+          Adobe's suite of creative applications requires a convenient and
+          reliable undo-redo mechanism to enable users to experiment freely with
+          their creative content without the risk of losing prior work.This is
+          achieveable through Command Pattern and a two-stack model.
+        </p>
+        <h3>Design Approach and Data Structures</h3>
+        <p>
+          The core design technique involves the
+          <strong>Command Pattern</strong>, which encapsulates each user action
+          as a distinct command object. These command objects implement an
+          <code>Execute()</code> method to perform the action and optionally an
+          <code>Undo()</code> method to reverse it. By delegating the
+          responsibility for action execution and reversal to command objects,
+          the application context remains streamlined and focused on managing
+          these commands rather than the specifics of each operation.
+        </p>
+        <p>
+          To efficiently manage the history of user actions and support undo and
+          redo operations, Adobe applications employ a
+          <strong>two-stack model</strong>. This consists of an
+          <em>undo stack</em> and a <em>redo stack</em>, which store executed
+          commands and undone commands, respectively. When a user performs an
+          action, the corresponding command is executed and pushed onto the undo
+          stack while the redo stack is cleared to maintain consistency. Upon an
+          undo request, the most recent command is popped from the undo stack,
+          its <code>Undo()</code> method is invoked, and it is pushed onto the
+          redo stack. Conversely, a redo request pops a command from the redo
+          stack, re-executes it, and pushes it back onto the undo stack.
+        </p>
+        <h3>Challenges and Benefits</h3>
+        <p>
+          This design efficiently handles complex sequences of user operations
+          while ensuring low-latency response times. The stack operations: push
+          and pop, operate in constant time (O(1)), which is essential for
+          maintaining performance during rapid sequences of edits. Additionally,
+          the design supports optional undo functionality, allowing certain
+          commands (such as saving a file) to bypass undo tracking if reversal
+          is not feasible or meaningful.
+        </p>
+        <p>
+          The modularity provided by the Command Pattern allows developers to
+          add new operations without modifying the core undo-redo mechanism,
+          enhancing maintainability and extensibility. The two-stack model
+          preserves the correct order of actions during undo and redo,
+          maintaining an intuitive user experience.
+        </p>
+        <h3>Summary of Design Techniques and Performance</h3>
+        <ul>
+          <li>
+            <strong>Command Pattern:</strong> Encapsulates each user action as
+            an object with <code>Execute()</code> and
+            <code>Undo()</code> methods.
+          </li>
+          <li>
+            <strong>Two-Stack Model:</strong> Uses an undo stack to track
+            executed commands and a redo stack to track undone commands.
+          </li>
+          <li>
+            <strong>Time Complexity:</strong> Stack operations (push/pop)
+            execute in O(1) time, ensuring efficient undo-redo navigation
+            regardless of history length.
+          </li>
+          <li>
+            <strong>Space Complexity:</strong> Linear in the number of stored
+            commands (O(N)), where N is the number of user actions tracked.
+          </li>
+        </ul>
+        <p>
+          This architecture enables Adobe Creative Suite applications to provide
+          users with fast, reliable, and flexible undo-redo capabilities
+          essential for professional creative workflows.
+        </p>
+        <figure>
+          <img
+            src="images/im1.png"
+            alt="Undo Redo Diagram"
+            style="display: block; margin: auto"
+          />
+          <figcaption>Command Pattern UML for Undo-Redo [1]</figcaption>
+        </figure>
+
+        <a
+          href="#"
+          target="_self"
+          onclick="saveScrollAndNavigate('codes/code1.html')"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+    <details class="business-case">
+      <summary>
+        2. Layer Dependency Resolution in Photoshop / Illustrator
+      </summary>
+      <div class="case-content">
+        <p>
+          Complex design projects in applications such as Photoshop and
+          Illustrator often involve multiple layers with intricate dependencies.
+          These dependencies include relationships such as clipping masks,
+          adjustment layers, and blending modes. Managing these dependencies
+          efficiently is essential to ensure that any changes to one layer
+          correctly propagate through related layers, preserving the overall
+          integrity and visual consistency of the design.
+        </p>
+        <h3>Design Approach and Data Structures</h3>
+        <p>
+          Adobe utilizes a
+          <strong>Directed Acyclic Graph (DAG)</strong> structure to represent
+          the dependencies between layers,. In this model, each node corresponds
+          to a layer, and directed edges represent dependency relationships
+          between layers. The acyclic nature of the graph ensures that circular
+          dependencies, which would lead to infinite loops or inconsistent
+          state, are inherently prevented.
+        </p>
+        <p>
+          Processing layers in an order that respects their dependencies is
+          critical. This is achieved through
+          <strong>topological sorting</strong> of the DAG. Topological sorting
+          produces a linear ordering of the layers such that each layer appears
+          only after all of its dependencies have been processed. This
+          guarantees that when a layer is updated or rendered, all layers it
+          depends on have already been handled, ensuring correctness in the
+          final composition.
+        </p>
+        <h3>Performance and Scalability</h3>
+        <p>
+          The topological sorting algorithm employed for layer processing
+          operates with a time complexity of <em>O(n + m)</em>, where
+          <em>n</em> represents the number of layers and <em>m</em> denotes the
+          number of dependency edges. This efficiency allows the system to scale
+          gracefully as the number and complexity of layers increase,
+          maintaining consistent performance even in large and intricate design
+          projects.
+        </p>
+        <h3>Summary of Design Techniques and Efficiency</h3>
+        <ul>
+          <li>
+            <strong>Directed Acyclic Graph:</strong> Models layers and their
+            dependencies to prevent circular references and maintain clarity in
+            relationships.
+          </li>
+          <li>
+            <strong>Topological Sorting:</strong> Determines the correct
+            processing order of layers based on dependencies.
+          </li>
+          <li>
+            <strong>Time Complexity:</strong> Achieved in
+            <em>O(n + m)</em> time, ensuring efficient updates regardless of
+            project size.
+          </li>
+          <li>
+            <strong>Scalability:</strong> The approach remains performant as
+            layer count and dependency complexity grow.
+          </li>
+        </ul>
+        <p>
+          The approach ensures that changes propagate in a controlled and
+          efficient manner, supporting the creation of sophisticated digital
+          artwork with confidence and precision.
+        </p>
+        <figure>
+          <img
+            src="images/im2.png"
+            alt="Directed Acyclic Graph"
+            style="display: block; margin: auto"
+          />
+          <figcaption>
+            Directed Acyclic Graph and Topological Sorting[2]
+          </figcaption>
+        </figure>
+
+        <a
+          href="#"
+          target="_self"
+          onclick="saveScrollAndNavigate('codes/code1.html')"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>3. Text Search in PDFs (Adobe Acrobat)</summary>
+      <div class="case-content">
+        <p>
+          In professional and academic workflows, the ability to quickly locate
+          specific content within PDF documents significantly enhances
+          productivity. Adobe Acrobat's search functionality is a critical
+          feature for users working with large, information-dense documents such
+          as legal contracts, technical manuals, or research papers. Delivering
+          a seamless and responsive search experience requires a robust internal
+          architecture capable of handling diverse document structures,
+          encodings, and large volumes of text.
+        </p>
+
+        <h3>Design Approach and Data Structures</h3>
+        <p>
+          The foundation of Adobe Acrobat’s text search capability lies in a
+          combination of <strong>inverted indexing</strong> and
+          <strong>efficient string matching algorithms</strong>. These
+          components work in tandem to enable rapid query execution and accurate
+          results:
+        </p>
+        <ul>
+          <li>
+            <strong>Inverted Index:</strong> This structure maps each unique
+            word in the document to a list of its occurrences (page number,
+            position, etc.). By precomputing this mapping during document
+            parsing, the system can bypass linear scans and directly retrieve
+            relevant locations for a queried term.
+          </li>
+          <li>
+            <strong>String Matching Algorithms:</strong> For scenarios where
+            full-document indexing is not feasible or for more complex queries
+            (e.g., multi-word phrases or regular expressions), Acrobat employs
+            optimized algorithms like <em>Boyer-Moore</em> and
+            <em>Knuth-Morris-Pratt</em>. These algorithms reduce the number of
+            character comparisons during pattern matching, enabling fast
+            searches even in large text streams.
+          </li>
+        </ul>
+
+        <h3>Search Workflow and Execution Flow</h3>
+        <ol>
+          <li>
+            <strong>Preprocessing Phase:</strong>
+            <p>
+              Upon loading or opening a document, Acrobat parses the text
+              content, normalizes encodings (e.g., Unicode), and builds the
+              inverted index in memory or on disk, depending on system
+              constraints. This preprocessing phase runs in linear time relative
+              to the number of words in the document, O(n), where n is the total
+              token count.
+            </p>
+          </li>
+          <li>
+            <strong>Query Execution Phase:</strong>
+            <p>
+              For simple term-based queries, the inverted index is consulted
+              directly to retrieve all matching positions in near-constant time
+              (O(1) or O(log n), depending on the implementation). For complex
+              or partial matches (e.g., wildcards, stemming), Acrobat falls back
+              on advanced string matching, scanning relevant text blocks using
+              efficient sublinear algorithms.
+            </p>
+          </li>
+          <li>
+            <strong>Result Presentation:</strong>
+            <p>
+              The matched terms are highlighted in context, with navigation and
+              filtering options for user refinement. Results update dynamically
+              as users modify their queries.
+            </p>
+          </li>
+        </ol>
+
+        <h3>Challenges and Benefits</h3>
+        <p>
+          The primary challenge lies in balancing performance with memory and
+          storage efficiency, particularly for large or scanned documents
+          containing OCR-generated text. Acrobat handles these with selective
+          indexing, background parsing, and persistent caching strategies.
+        </p>
+        <p>The benefits of this architecture include:</p>
+        <ul>
+          <li>
+            <strong>Speed:</strong> Indexed searches return results
+            instantaneously, even in multi-hundred-page documents.
+          </li>
+          <li>
+            <strong>Accuracy:</strong> Encoding normalization and intelligent
+            tokenization ensure robust handling of multilingual content and
+            non-standard formatting.
+          </li>
+          <li>
+            <strong>Scalability:</strong> The approach supports live search
+            across multiple documents and can be extended for enterprise-level
+            batch processing in Document Cloud solutions.
+          </li>
+        </ul>
+
+        <h3>Summary of Design Techniques and Performance</h3>
+        <ul>
+          <li>
+            <strong>Inverted Index:</strong> Enables direct lookup of words and
+            phrases with minimal latency.
+          </li>
+          <li>
+            <strong>String Matching Algorithms:</strong> Supports dynamic,
+            pattern-based queries with optimized character comparisons.
+          </li>
+          <li>
+            <strong>Time Complexity:</strong>
+            <ul>
+              <li>Index Build: O(n) for n words in the document.</li>
+              <li>
+                Search Query: O(1) to O(log n) for index-based retrieval;
+                sublinear to linear for pattern matching.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Space Complexity:</strong> Linear with respect to document
+            size, optimized through data compression and lazy loading.
+          </li>
+        </ul>
+
+        <p>
+          This architecture ensures that Adobe Acrobat delivers a fast,
+          reliable, and scalable search experience — a critical feature for
+          users navigating today’s vast volumes of digital content.
+        </p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>4. Compression in Adobe Media Encoder</summary>
+      <div class="case-content">
+        <p>
+          Adobe Media Encoder handles a wide variety of video and audio formats.
+          Alongside the primary media data, files often contain large amounts of
+          <em>metadata</em> — such as tags, timestamps, scene descriptors, audio
+          channel layout, and other textual or structured information.
+          Repetitive patterns in such metadata can lead to bloated file sizes or
+          reduced transfer efficiency. To ensure faster export times, reduce
+          file size, and preserve fidelity during intermediate saves,
+          compression of this auxiliary data becomes essential.
+        </p>
+
+        <p>
+          <strong>Design Approach and Data Structures</strong><br />
+          An effective solution for compressing structured and repetitive
+          metadata involves using <em>prefix-based coding techniques</em>, of
+          which <strong>Huffman Coding</strong> is a classic, well-established
+          method. The technique is founded on greedy algorithms and relies on
+          variable-length encoding, assigning
+          <strong>shorter codes to more frequent items</strong> and
+          <strong>longer codes to rarer items</strong>. The core data structure
+          used is the <strong>Huffman Tree</strong>, a type of binary tree. Each
+          node of this tree represents either a character (or token) or a merged
+          frequency of two subtrees. A <em>min-heap (priority queue)</em> is
+          used to build this tree. Once the tree is constructed, each
+          character’s binary code is derived from its unique root-to-leaf path.
+        </p>
+
+        <p>
+          <strong>Challenges and Benefits</strong><br />
+          Huffman coding is well-suited for situations with highly repetitive
+          metadata, common in video encoding. It achieves size reduction while
+          maintaining unique decodability. However, it performs less efficiently
+          on uniformly distributed data or when the frequency model is
+          constantly changing.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Benefits:</strong> Reduces redundancy, speeds up processing,
+            decodes quickly
+          </li>
+          <li>
+            <strong>Challenges:</strong> Requires frequency analysis, less
+            effective on non-redundant data
+          </li>
+        </ul>
+
+        <p><strong>Summary of Design Techniques and Performance</strong></p>
+        <ul>
+          <li><strong>Data Structures:</strong> Min-Heap, Binary Tree</li>
+          <li><strong>Algorithm:</strong> Huffman Coding (Greedy approach)</li>
+          <li>
+            <strong>Time Complexity:</strong> O(n log n) tree build; O(L) per
+            symbol encoding
+          </li>
+          <li>
+            <strong>Space Complexity:</strong> O(n) for code table and tree
+            storage
+          </li>
+        </ul>
+        <figure>
+          <img
+            src="images/im4.png"
+            alt="Huffman Coding"
+            style="display: block; margin: auto"
+          />
+          <figcaption>
+            Huffman tree generated from the exact frequencies of the text "this
+            is an example of a huffman tree". [3]
+          </figcaption>
+        </figure>
+
+        <a
+          href="#"
+          target="_self"
+          onclick="saveScrollAndNavigate('codes/code1.html')"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>5. Auto Text Wrapping in InDesign</summary>
+      <div class="case-content">
+        <p>
+          Adobe InDesign provides advanced automatic line-breaking to ensure
+          consistent text formatting across a variety of layouts. Rather than
+          simply inserting line breaks where a word overflows the margin, it
+          seeks to calculate the <em>optimal line breaks</em> that minimize
+          visual imbalance and reduce uneven whitespace. The underlying problem
+          is to determine where to break lines in a paragraph to achieve clean
+          formatting and typographic balance.
+        </p>
+
+        <p>
+          <strong>Design Approach and Data Structures</strong><br />
+          A theoretically sound and widely used solution is the
+          <strong>Knuth–Plass algorithm</strong>, originally developed for the
+          TeX typesetting system. This method models line breaking as a
+          <em>global optimization problem</em> and uses
+          <strong>Dynamic Programming</strong> to find the sequence of line
+          breaks that yields the lowest "badness" score — a penalty metric based
+          on whitespace irregularity and line length deviation. A
+          <strong>DP grid</strong> (or table) is computed where each entry
+          tracks the minimal cumulative penalty for wrapping lines up to a
+          certain word. The algorithm explores all possible breakpoints,
+          computes penalties, and reconstructs the layout by backtracking
+          through the DP table. This provides a balanced and elegant paragraph
+          structure even under constraints like justification or hyphenation.
+        </p>
+
+        <p><strong>Challenges and Benefits</strong></p>
+        <ul>
+          <li>
+            <strong>Benefits:</strong> Produces high-quality typeset output with
+            uniform spacing
+          </li>
+          <li>
+            <strong>Challenges:</strong> Computationally more intensive than
+            greedy methods, especially for dynamic layout changes
+          </li>
+        </ul>
+
+        <p><strong>Summary of Design Techniques and Performance</strong></p>
+        <ul>
+          <li>
+            <strong>Data Structures:</strong> DP Table (cost matrix), arrays for
+            backtracking
+          </li>
+          <li>
+            <strong>Algorithm:</strong> Knuth–Plass Dynamic Programming-based
+            line breaking
+          </li>
+          <li><strong>Time Complexity:</strong> O(n²), optimizable</li>
+          <li>
+            <strong>Space Complexity:</strong> O(n) to O(n²) based on
+            implementation
+          </li>
+        </ul>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>6. Version Control in Adobe Creative Cloud</summary>
+      <div class="case-content">
+        <p>
+          Adobe Creative Cloud offers built-in document history and versioning,
+          allowing users to access previous states of their files, restore old
+          edits, and collaborate in real time. This requires a backend system
+          that can efficiently track file changes across potentially large and
+          binary-heavy design assets, such as PSDs, AI files, or video
+          sequences. Storing a full copy of each version would be storage-heavy
+          and slow. Therefore, Adobe likely employs smart techniques to detect
+          whether a file is new, modified, or unchanged, and only save the
+          necessary diffs. The key technical problem here is detecting change
+          with minimal overhead while ensuring version integrity.
+        </p>
+
+        <p>
+          <strong>Design Approach and Data Structures</strong><br />
+          A common solution for change tracking and version deduplication in
+          cloud storage systems uses a combination of
+          <strong>Hash Maps</strong> and <strong>Bloom Filters</strong>. Hash
+          maps store the hash of every saved file chunk or whole file, using the
+          hash as a unique identifier. This allows constant-time lookup of
+          previously stored versions. To avoid recomputing or scanning the
+          entire database for duplicates, <strong>Bloom Filters</strong> are
+          employed as a space-efficient probabilistic structure. They allow fast
+          membership checks to see if a file has likely been seen before. If a
+          Bloom filter says a file has not been seen, it's certainly new. If it
+          says it might have been seen, a more expensive hash lookup is
+          triggered to confirm duplication. Hashing (typically SHA-256 or
+          stronger) ensures integrity and uniqueness. Paired with chunking
+          techniques, it also helps identify unchanged blocks within large
+          files, enabling block-level deduplication and delta storage.
+        </p>
+
+        <p><strong>Challenges and Benefits</strong></p>
+        <ul>
+          <li>
+            <strong>Benefits:</strong> Enables efficient storage of multiple
+            versions without redundancy, speeds up sync and rollback
+          </li>
+          <li>
+            <strong>Challenges:</strong> Requires tuning false-positive rate in
+            Bloom Filters, dealing with binary diffs, and ensuring hash
+            collisions are rare
+          </li>
+        </ul>
+
+        <p><strong>Summary of Design Techniques and Performance</strong></p>
+        <ul>
+          <li>
+            <strong>Data Structures:</strong> Hash Map (for exact match), Bloom
+            Filter (for fast probabilistic check)
+          </li>
+          <li>
+            <strong>Algorithm:</strong> Hashing + Bloom Filter membership test +
+            block-level deduplication
+          </li>
+          <li>
+            <strong>Time Complexity:</strong> O(1) expected for hash and Bloom
+            filter operations
+          </li>
+          <li>
+            <strong>Space Complexity:</strong> O(n) for storing n hashes and a
+            Bloom Filter of configurable size
+          </li>
+        </ul>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>7. Document Indexing in Adobe Acrobat Search</summary>
+      <div class="case-content">
+        <p>
+          Adobe Acrobat enables users to search for words and phrases across
+          hundreds or even thousands of pages in real time. This requires
+          high-performance indexing and search mechanisms. The technical problem
+          is to support fast, full-document keyword and phrase queries without
+          having to scan the entire text during every search.
+        </p>
+
+        <p>
+          <strong>Design Approach and Data Structures</strong><br />
+          Adobe Acrobat likely leverages a combination of
+          <strong>Inverted Indexes</strong> and
+          <strong>Suffix Arrays</strong> to enable efficient search over large
+          PDF documents. <br /><br />
+          An <strong>Inverted Index</strong> maps each unique word (token) to a
+          list of page numbers or character offsets where the word occurs. This
+          allows O(1) lookup of documents or pages containing a specific word,
+          drastically improving performance compared to brute-force search.
+          <br /><br />
+          For handling <strong>phrase-based queries</strong> like "machine
+          learning model" (where order and proximity matter),
+          <strong>Suffix Arrays</strong> come into play. A Suffix Array contains
+          all suffixes of the text, sorted lexicographically. Binary search can
+          be used to find phrases in O(log n) time, enabling scalable phrase and
+          substring queries within large PDF texts.
+        </p>
+
+        <p><strong>Challenges and Benefits</strong></p>
+        <ul>
+          <li>
+            <strong>Challenges:</strong> Maintaining updated indexes during live
+            edits or annotations, memory usage for storing large suffix arrays,
+            and handling noisy OCR data.
+          </li>
+          <li>
+            <strong>Benefits:</strong> Search latency drops from linear to
+            logarithmic time, enables real-time multi-keyword search, and
+            supports advanced phrase queries and filtering.
+          </li>
+        </ul>
+
+        <p><strong>Summary of Design Techniques and Performance</strong></p>
+        <ul>
+          <li>
+            <strong>Data Structures:</strong> Inverted Index (HashMap-style word
+            → locations), Suffix Array (for phrases)
+          </li>
+          <li>
+            <strong>Algorithm:</strong> Preprocessing of text → tokenization →
+            inverted index building → suffix sorting
+          </li>
+          <li>
+            <strong>Time Complexity:</strong> Search in O(log n) for phrases,
+            O(1) for single-word lookups
+          </li>
+          <li>
+            <strong>Space Complexity:</strong> O(n) for index size, where n is
+            total tokens
+          </li>
+        </ul>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>
+        8. Real-Time Histogram Adjustments in Adobe Lightroom / Photoshop
+      </summary>
+      <div class="case-content">
+        <p>
+          In Adobe Lightroom and Photoshop, histogram displays are crucial for
+          tonal editing. These histograms reflect the distribution of pixel
+          intensities ranging from shadows (dark) to highlights (bright). When
+          users interact with sliders (such as those for shadows, midtones, or
+          highlights), the application must instantly calculate the number of
+          pixels in specific brightness ranges, and dynamically update the
+          histogram if pixel values are modified. This interactivity must happen
+          in real time, even for high-resolution images.
+        </p>
+        <p>
+          <strong>Design Approach and Data Structures</strong><br />
+          The intensity range of digital images spans from 0 to 255, forming 256
+          discrete histogram bins. To support efficient interaction and
+          real-time updates, Adobe's histogram processing likely relies on
+          either a <strong>Segment Tree</strong> or a
+          <strong>Fenwick Tree</strong> (Binary Indexed Tree). <br /><br />
+          These data structures support two core operations efficiently:
+
+          <li>
+            <strong>Range Sum Query:</strong> Determine the number of pixels in
+            a specific intensity range [L, R]. For example, if the user modifies
+            brightness in the 50–100 range, we need to instantly know how many
+            pixels fall in that interval.
+          </li>
+          <li>
+            <strong>Point Update:</strong> If the pixel intensity of one pixel
+            changes from 70 to 90, the histogram must reflect this change
+            immediately, decrementing the count at 70 and incrementing at 90.
+          </li>
+
+          Segment Trees and Fenwick Trees allow both operations to be performed
+          in
+          <strong>O(log n)</strong> time, which ensures responsiveness even in
+          large-scale edits.
+        </p>
+        <p><strong>Challenges and Benefits</strong></p>
+        <ul>
+          <li>
+            <strong>Challenges:</strong> Handling millions of pixels in
+            real-time, ensuring no lag in histogram visualization, synchronizing
+            with GPU acceleration pipelines.
+          </li>
+          <li>
+            <strong>Benefits:</strong> Provides photographers and designers with
+            instant feedback during tonal editing, encourages exploratory
+            editing workflows with precise control.
+          </li>
+        </ul>
+
+        <p><strong>Summary of Design Techniques and Performance</strong></p>
+        <ul>
+          <li>
+            <strong>Data Structures:</strong> Segment Tree or Fenwick Tree over
+            256 brightness bins
+          </li>
+          <li>
+            <strong>Operations:</strong> Range Sum Query for histogram display,
+            Point Updates for pixel value adjustments
+          </li>
+          <li>
+            <strong>Time Complexity:</strong> O(log n) for both update and query
+          </li>
+          <li>
+            <strong>Space Complexity:</strong> O(n) where n is number of bins
+            (usually fixed at 256)
+          </li>
+        </ul>
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>9. Layer Opacity Range Blending in Adobe After Effects</summary>
+      <div class="case-content">
+        <p>
+          <strong>Product Feature:</strong><br />
+          Adobe After Effects supports multi-layered video editing, where each
+          layer can be independently animated, including its opacity. One common
+          user workflow involves fading in/out layers or applying dynamic
+          opacity changes over specific frame ranges across multiple layers
+          simultaneously. This requires efficient rendering and blending of
+          layer opacities over time, especially when working with timelines
+          spanning thousands of frames.
+        </p>
+
+        <p>
+          <strong>Problem Overview:</strong><br />
+          When a user defines an opacity transition — for example, applying a
+          20% fade-in effect to layers 3–5 between frames 100 to 150 — the
+          software must be capable of updating those opacity values across a
+          continuous frame range and retrieving cumulative opacity contributions
+          during rendering. Without an efficient structure, recalculating blend
+          values for every frame-layer combination would become computationally
+          expensive.
+        </p>
+
+        <p>
+          <strong>Design Approach and Data Structures:</strong><br />
+          To optimize both performance and responsiveness, a
+          <strong>Segment Tree with Lazy Propagation</strong> is a suitable
+          design. Each node of the segment tree represents a contiguous frame
+          range and stores the cumulative opacity updates applied to that range.
+          Lazy propagation ensures that updates (e.g., “apply +20% opacity
+          between frames 100–150”) are deferred and batched until necessary,
+          avoiding redundant computations. This structure allows:
+        </p>
+        <ul>
+          <li>
+            <strong>Range Updates:</strong> Apply opacity transitions to a frame
+            range with a single operation
+          </li>
+          <li>
+            <strong>Range Queries:</strong> Retrieve the effective opacity value
+            over any frame interval during rendering
+          </li>
+        </ul>
+        This is especially useful in After Effects projects involving hundreds
+        of layers and long-duration videos where opacity effects overlap and
+        evolve.
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>
+        10. Intelligent Mask Refinement (Photoshop Select Subject / Remove
+        Background)
+      </summary>
+      <div class="case-content">
+        <p>
+          <strong>Use Case:</strong><br />
+          When a user performs a quick object selection using tools like Lasso
+          or Auto-Select, Photoshop refines the selection mask to create sharp
+          edges, clean boundaries, and precise object outlines. This refinement
+          blends traditional algorithmic techniques with machine learning to
+          deliver professional results even from noisy or imprecise inputs. The
+          mask refinement process sits at the intersection of real-time user
+          interaction and high-precision computation. It addresses the core
+          creative pain point of removing complex backgrounds (like hair, fur,
+          or irregular shapes) with minimal manual effort. The feature supports
+          both creative professionals and casual users, making it a central part
+          of Adobe's product value.
+        </p>
+
+        <p>
+          <strong>Design Techniques and Data Structures:</strong><br />
+          The refinement process uses a hybrid approach:
+        </p>
+
+        <p>
+          - <strong>Disjoint Set Union (Union-Find):</strong> Used to identify
+          and group connected regions of foreground or background pixels.<br />
+          - <strong>Graphs (Adjacency Lists):</strong> Underpin Graph Cuts,
+          which formulate mask refinement as a min-cut/max-flow problem to find
+          the optimal separation boundary between foreground and background.<br />
+          - <strong>Priority Queue:</strong> Employed in region-growing
+          algorithms to expand mask boundaries based on edge confidence and
+          local variance scores.
+        </p>
+
+        <p>
+          <strong>Role of Statistics:</strong><br />
+          Classical image statistics are essential to guide and constrain the ML
+          output. This includes:
+        </p>
+
+        <p>
+          - Color histograms calculated per-pixel and per-patch to infer class
+          probabilities.<br />
+          - Edge detectors like Sobel and Scharr filters used to compute
+          contrast and gradient magnitude. Thresholding is done based on local
+          standard deviation to detect true object edges.<br />
+          - Local variance and statistical texture features determine whether
+          ambiguous pixels belong to object or background.
+        </p>
+
+        <p>
+          <strong>Role of Machine Learning:</strong><br />
+          ML models like DeepLab or Mask R-CNN first produce a coarse binary
+          segmentation mask of the subject. This output encodes semantic
+          information and context. However, these masks often lack fine detail.
+          To compensate:
+        </p>
+
+        <p>
+          - <strong>Conditional Random Fields (CRFs):</strong> are applied
+          post-processing to sharpen boundaries and align masks with image
+          gradients.<br />
+          - Edge-aware refinement modules combine learned confidence with
+          statistical edge maps to make intelligent pixel-level decisions near
+          boundaries.<br />
+          - Models are trained on datasets like COCO or ADE20K for
+          generalization across scenes.
+        </p>
+
+        <p>
+          <strong>Efficiency and Practicality:</strong><br />
+          The Graph Cut stage typically runs in near-linear time due to
+          push-relabel or Boykov-Kolmogorov implementations. CRF inference is
+          optimized using mean-field approximation. Union-Find operations (for
+          connected components) are amortized O(1), enabling fast region
+          classification.
+        </p>
+
+        <p>
+          <strong>Summary of Design and Performance:</strong><br />
+          - <strong>Data Structures:</strong> Disjoint Sets, Graphs, Priority
+          Queues<br />
+          - <strong>Algorithms:</strong> Graph Cuts, CRFs, Region Growing<br />
+          - <strong>Machine Learning:</strong> DeepLab, U-Net, Mask R-CNN for
+          initial segmentation<br />
+          - <strong>Complexity:</strong> Graph Cuts – O(n log n), CRFs –
+          Approximate inference in O(n)
+        </p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <details class="business-case">
+      <summary>11. Scene Change Detection in Adobe Premiere Pro.</summary>
+      <div class="case-content">
+        <p>
+          <strong>Use Case:</strong><br />
+          Adobe Premiere Pro allows editors to work with long, continuous video
+          clips. Automatically detecting scene transitions helps segment the
+          timeline into manageable parts for faster navigation, editing, and
+          visual indexing.
+        </p>
+
+        <p>
+          <strong>Why This Is a Strong Business Case:</strong><br />
+          Detecting scene boundaries is non-trivial. A hard cut may have a sharp
+          histogram or pixel difference, but soft transitions like pans, fades,
+          or camera angle shifts may not show dramatic frame-level change. A
+          robust system combines low-level signal statistics with learning-based
+          context recognition, making it ideal for hybrid algorithm+ML design.
+        </p>
+
+        <p>
+          <strong>Design Techniques and Data Structures:</strong><br />
+          Scene detection pipelines combine classical signal analysis with
+          sliding comparisons and hashing:
+        </p>
+
+        <p>
+          - <strong>Sliding Window:</strong> A fixed-size queue or deque
+          compares features (e.g., histogram, motion vector, pixel differences)
+          across adjacent frames.<br />
+          - <strong>Rolling Hash:</strong> Similar to Rabin-Karp, used to
+          compute a frame “fingerprint” that can help detect recurring visual
+          elements or cuts.<br />
+          - <strong>Segment Trees:</strong> Efficiently compute histogram
+          statistics over a range of frames for dynamic, timeline-based queries.
+        </p>
+
+        <p>
+          <strong>Role of Statistics:</strong><br />
+          Statistical indicators help trigger potential scene change candidates:
+        </p>
+
+        <p>
+          - Compute <strong>Mean Squared Error (MSE)</strong> and
+          <strong>Histogram Differences</strong> between frames.<br />
+          - Use <strong>SSIM (Structural Similarity Index)</strong> to assess
+          visual degradation across time.<br />
+          - Apply statistical thresholds like <strong>Z-score</strong> or
+          <strong>CUSUM</strong> (Cumulative Sum Control Chart) on metric
+          deltas.<br />
+          - Motion-based analysis: Track <strong>optical flow</strong> magnitude
+          variance to catch sudden scene shifts even when color doesn’t change
+          much.
+        </p>
+
+        <p>
+          <strong>Role of Machine Learning:</strong><br />
+          Deep temporal models improve detection in complex cases like slow
+          pans, camera tilts, or crossfades:
+        </p>
+
+        <p>
+          - <strong>Temporal CNNs:</strong> Trained over video frame windows to
+          predict change likelihood.<br />
+          - <strong>LSTM or GRU Models:</strong> Capture time-based dependencies
+          across frames to classify transitions.<br />
+          - Output includes scene label, frame index, and confidence score.
+          Training datasets include TV show cuts, film edits, or user-annotated
+          timelines.
+        </p>
+
+        <p>
+          <strong>Efficiency and Practicality:</strong><br />
+          - <strong>Sliding Window & Hashing:</strong> O(1) per frame with
+          rolling buffer.<br />
+          - <strong>Segment Tree Histogram Query:</strong> O(log n) per range
+          operation.<br />
+          - <strong>ML Model Inference:</strong> O(n) for n frames with
+          constant-size context window.
+        </p>
+
+        <p>
+          <strong>Summary of Design and Performance:</strong><br />
+          - <strong>Data Structures:</strong> Queue/Deque (Sliding Window),
+          Rolling Hash, Segment Trees<br />
+          - <strong>Algorithms:</strong> Histogram-based change detection, SSIM,
+          Optical Flow, CUSUM<br />
+          - <strong>Machine Learning:</strong> Temporal CNNs, LSTM for
+          context-aware transition detection<br />
+          - <strong>Complexity:</strong> Linear in number of frames with O(log
+          n) auxiliary structures
+        </p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
+          alt="Trie Structure"
+        />
+        <a
+          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          target="_blank"
+          >Code Implementation</a
+        >
+      </div>
+    </details>
+
+    <section class="references">
+      <h2>References</h2>
+      <ol class="indexed-references">
+        <li>
+          <a
+            href="https://codinghelmet.com/articles/does-the-command-pattern-require-undo"
+            target="_blank"
+            >Does the Command Pattern Require Undo? by Zoran Horvat</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://medium.com/@konduruharish/topological-sort-in-typescript-and-c-6d5ecc4bad95"
+            target="_blank"
+            >Topological Sort — In typescript and C#</a
+          >
+        </li>
+
+        <li>
+          <a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank"
+            >Huffman Coding</a
+          >
+        </li>
+      </ol>
+    </section>
+
+    <footer>© 2025 Adobe Portfolio by Francis Fernandes</footer>
+  </body>
+</html>
