@@ -669,14 +669,13 @@
           />
           <figcaption>
             Huffman tree generated from the exact frequencies of the text "this
-            is an example of a huffman tree". [6]
+            is an example of a huffman tree". [7]
           </figcaption>
         </figure>
 
         <a
-          href="#"
-          target="_self"
-          onclick="saveScrollAndNavigate('codes/code1.html')"
+          href="https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/"
+          target="_blank"
           >Code Implementation</a
         >
       </div>
@@ -710,6 +709,7 @@
           computes penalties, and reconstructs the layout by backtracking
           through the DP table. This provides a balanced and elegant paragraph
           structure even under constraints like justification or hyphenation.
+          [8]
         </p>
 
         <p><strong>Challenges and Benefits</strong></p>
@@ -784,7 +784,7 @@
           triggered to confirm duplication. Hashing (typically SHA-256 or
           stronger) ensures integrity and uniqueness. Paired with chunking
           techniques, it also helps identify unchanged blocks within large
-          files, enabling block-level deduplication and delta storage.
+          files, enabling block-level deduplication and delta storage. [9] [10]
         </p>
 
         <p><strong>Challenges and Benefits</strong></p>
@@ -819,17 +819,17 @@
             Bloom Filter of configurable size
           </li>
         </ul>
-        <!--
+
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
-          alt="Trie Structure"
+          src="https://iamluminousmen-media.s3.amazonaws.com/media/building-a-bloom-filter/building-a-bloom-filter-10.jpeg"
+          alt="Bloom Filter"
         />
         <a
-          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          href="https://www.geeksforgeeks.org/bloom-filters-introduction-and-python-implementation/"
           target="_blank"
           >Code Implementation</a
         >
-      --></div>
+      </div>
     </details>
 
     <details class="business-case">
@@ -859,7 +859,7 @@
           <strong>Suffix Arrays</strong> come into play. A Suffix Array contains
           all suffixes of the text, sorted lexicographically. Binary search can
           be used to find phrases in O(log n) time, enabling scalable phrase and
-          substring queries within large PDF texts.
+          substring queries within large PDF texts. [11][12]
         </p>
 
         <p><strong>Challenges and Benefits</strong></p>
@@ -896,11 +896,22 @@
           </li>
         </ul>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
-          alt="Trie Structure"
+          src="https://media.geeksforgeeks.org/wp-content/uploads/20231106114619/Construction-Of-LCP-array.jpg"
+          alt="Construction of LCP Array"
         />
+
+        <img
+          src="https://media.geeksforgeeks.org/wp-content/uploads/20231106114702/suffix-array.jpg"
+          alt="Suffix Array"
+        />
+
+        <img
+          src="https://media.geeksforgeeks.org/wp-content/uploads/20231106114748/calculating.jpg"
+          alt="Suffix Array Calculation"
+        />
+
         <a
-          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          href="https://www.geeksforgeeks.org/suffix-array-set-1-introduction/"
           target="_blank"
           >Code Implementation</a
         >
@@ -981,12 +992,16 @@
           </li>
         </ul>
 
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
-          alt="Trie Structure"
-        />
+        <figure>
+          <img
+            src="https://deen3evddmddt.cloudfront.net/uploads/content-images/segment-tree.webp"
+            alt="Inverted Index"
+            style="display: block; margin: auto"
+          />
+          <figcaption>Segment Tree for Range Sum query [13]</figcaption>
+        </figure>
         <a
-          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          href="https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/tutorial/"
           target="_blank"
           >Code Implementation</a
         >
@@ -1040,13 +1055,9 @@
         </ul>
         This is especially useful in After Effects projects involving hundreds
         of layers and long-duration videos where opacity effects overlap and
-        evolve.
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
-          alt="Trie Structure"
-        />
+        evolve. [14]
         <a
-          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          href="https://www.scaler.com/topics/data-structures/segment-tree-with-lazy-propagation/"
           target="_blank"
           >Code Implementation</a
         >
@@ -1314,6 +1325,61 @@
         <li>
           <a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank"
             >Huffman Coding</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="http://www.eprg.org/G53DOC/pdfs/knuth-plass-breaking.pdf"
+            target="_blank"
+            >Knuth, Donald E.; Plass, Michael F. (1981), "Breaking paragraphs
+            into lines", Software: Practice and Experience, 11 (11): 1119–1184,
+            doi:10.1002/spe.4380111102, S2CID 206508107.</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://conservancy.umn.edu/server/api/core/bitstreams/78b7dae9-cf32-48a7-8f2a-d33b0138283b/content?utm_source=chatgpt.com"
+            target="_blank"
+            >An Efficient Data Deduplication Design with Flash-Memory Based
+            Solid State Drive</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://luminousmen.com/post/building-a-bloom-filter"
+            target="_blank"
+            >Building a bloom filter</a
+          >
+        </li>
+
+        <li>
+          <a href="https://en.wikipedia.org/wiki/Suffix_array?" target="_blank"
+            >Suffix Arrays - Wikipedia</a
+          >
+        </li>
+
+        <li>
+          <a href="https://www.cs.cmu.edu/~dga/csa.pdf" target="_blank"
+            >A Simple Introduction to Compressed Suffix Arrays</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://www.wscubetech.com/resources/dsa/segment-tree"
+            target="_blank"
+            >Segment Tree in Data Structures</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://automationtestlab.com/segment-trees-data-structure-java/"
+            target="_blank"
+            >Segment Trees: Advanced Applications</a
           >
         </li>
       </ol>
