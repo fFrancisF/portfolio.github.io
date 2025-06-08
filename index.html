@@ -326,13 +326,14 @@
         </figure>
 
         <a
-          href="#"
-          target="_self"
-          onclick="saveScrollAndNavigate('codes/code1.html')"
+          href="https://www.linkedin.com/advice/0/how-can-you-implement-undo-redo-functionality-qmpff#:~:text=For%20undo%2C%20pop%20the%20last%20command%2C%20revert%20its%20action%2C,actions%20in%20the%20web%20app."
+          target="_blank"
           >Code Implementation</a
+        >
         >
       </div>
     </details>
+
     <details class="business-case">
       <summary>
         2. Layer Dependency Resolution in Photoshop / Illustrator
@@ -349,7 +350,7 @@
         </p>
         <h3>Design Approach and Data Structures</h3>
         <p>
-          Adobe utilizes a
+          Such an application utilizes a
           <strong>Directed Acyclic Graph (DAG)</strong> structure to represent
           the dependencies between layers,. In this model, each node corresponds
           to a layer, and directed edges represent dependency relationships
@@ -365,7 +366,7 @@
           only after all of its dependencies have been processed. This
           guarantees that when a layer is updated or rendered, all layers it
           depends on have already been handled, ensuring correctness in the
-          final composition.
+          final composition.[2]
         </p>
         <h3>Performance and Scalability</h3>
         <p>
@@ -410,14 +411,14 @@
             style="display: block; margin: auto"
           />
           <figcaption>
-            Directed Acyclic Graph and Topological Sorting[2]
+            Directed Acyclic Graph and Topological Sorting[3]
           </figcaption>
         </figure>
 
         <a
           href="#"
           target="_self"
-          onclick="saveScrollAndNavigate('codes/code1.html')"
+          onclick="saveScrollAndNavigate('codes/code2.html')"
           >Code Implementation</a
         >
       </div>
@@ -427,139 +428,170 @@
       <summary>3. Text Search in PDFs (Adobe Acrobat)</summary>
       <div class="case-content">
         <p>
-          In professional and academic workflows, the ability to quickly locate
-          specific content within PDF documents significantly enhances
-          productivity. Adobe Acrobat's search functionality is a critical
-          feature for users working with large, information-dense documents such
-          as legal contracts, technical manuals, or research papers. Delivering
-          a seamless and responsive search experience requires a robust internal
-          architecture capable of handling diverse document structures,
-          encodings, and large volumes of text.
+          In professional environments, users often work with extensive PDF
+          documents that contain technical specifications, legal language,
+          research content, or product manuals. Efficiently searching through
+          these files for specific terms or phrases is essential for
+          productivity. PDF viewers like Adobe Acrobat prioritize a responsive
+          search experience to allow users to locate information with minimal
+          delay [4][5].
         </p>
 
-        <h3>Design Approach and Data Structures</h3>
+        <h2>Design Approach and Data Structures</h2>
+
         <p>
-          The foundation of Adobe Acrobat’s text search capability lies in a
-          combination of <strong>inverted indexing</strong> and
-          <strong>efficient string matching algorithms</strong>. These
-          components work in tandem to enable rapid query execution and accurate
-          results:
+          A widely recognized approach for high-performance text search in
+          documents is the inverted index — a data structure that maps each
+          unique term to its locations in the document. This structure allows
+          the system to bypass sequential scanning and perform near-instant
+          lookups for user queries.
+        </p>
+
+        <h3>Inverted Index</h3>
+        <p>
+          For each distinct word in the document, the index stores references to
+          the positions where that word occurs (such as page number and offset).
+          This allows the search engine to jump directly to relevant sections
+          without reprocessing the entire text.
+        </p>
+
+        <h3>Tokenization and Normalization</h3>
+        <p>
+          During index construction, the document text is tokenized (split into
+          words or phrases), and encodings are normalized to handle different
+          character sets and languages. This ensures consistent search behavior
+          across multilingual or variably encoded files.
+        </p>
+
+        <h2>Search Workflow</h2>
+
+        <h3>1. Preprocessing Phase</h3>
+        <p>
+          When a document is opened, the text is parsed and preprocessed. This
+          step includes:
         </p>
         <ul>
+          <li>Text Extraction from the PDF content stream</li>
+          <li>Tokenization into searchable terms</li>
+          <li>Unicode Normalization to ensure compatibility</li>
+          <li>Index Construction, mapping terms to their occurrences</li>
+        </ul>
+        <p>
+          For performance, this process may occur lazily — that is, index
+          creation happens in the background or on demand for specific sections
+          of the document.
+        </p>
+        <p>
+          <strong>Time Complexity:</strong><br /><code
+            >Index construction is typically linear, O(n), where n is the number
+            of tokens in the document.</code
+          >
+        </p>
+
+        <h3>2. Query Execution Phase</h3>
+        <p>When the user types a search term:</p>
+        <ul>
           <li>
-            <strong>Inverted Index:</strong> This structure maps each unique
-            word in the document to a list of its occurrences (page number,
-            position, etc.). By precomputing this mapping during document
-            parsing, the system can bypass linear scans and directly retrieve
-            relevant locations for a queried term.
+            The system consults the inverted index to retrieve all matching
+            positions.
+          </li>
+          <li>For exact word searches, the lookup is nearly immediate.</li>
+          <li>
+            For phrase searches, the system may check positional adjacency of
+            indexed terms.
+          </li>
+        </ul>
+        <p>
+          This avoids full scans and allows the application to deliver results
+          in real time, even on large documents.
+        </p>
+        <p>
+          <strong>Time Complexity:</strong><br /><code
+            >Index lookups are typically O(1) to O(log n), depending on the
+            index structure (hash maps or trees).</code
+          >
+        </p>
+
+        <h3>3. Result Display Phase</h3>
+        <p>Matched terms are:</p>
+        <ul>
+          <li>Highlighted in the document</li>
+          <li>Listed in a navigation sidebar (if applicable)</li>
+          <li>Updated Live as users change their queries</li>
+        </ul>
+        <p>
+          This interactive response improves navigation through long or complex
+          documents.
+        </p>
+
+        <h2>Challenges and Handling Edge Cases</h2>
+        <p>PDF documents can vary in structure:</p>
+        <ul>
+          <li>Some contain clean, tagged text</li>
+          <li>Others rely on OCR or unstructured byte streams</li>
+        </ul>
+        <p>
+          For documents that do not support reliable indexing (e.g., scanned
+          PDFs), search may fallback to simpler linear scans or rely on
+          preprocessed text layers added during OCR.
+        </p>
+        <p>Memory and performance trade-offs are handled through:</p>
+        <ul>
+          <li>Partial or On-Demand Indexing</li>
+          <li>Caching of frequently accessed terms</li>
+          <li>Index Compression for large files</li>
+        </ul>
+
+        <h2>Summary of Design Techniques</h2>
+        <ul>
+          <li>
+            <strong>Inverted Index:</strong> Core structure for fast term
+            retrieval
           </li>
           <li>
-            <strong>String Matching Algorithms:</strong> For scenarios where
-            full-document indexing is not feasible or for more complex queries
-            (e.g., multi-word phrases or regular expressions), Acrobat employs
-            optimized algorithms like <em>Boyer-Moore</em> and
-            <em>Knuth-Morris-Pratt</em>. These algorithms reduce the number of
-            character comparisons during pattern matching, enabling fast
-            searches even in large text streams.
+            <strong>Tokenization and Encoding Normalization:</strong> Ensures
+            search accuracy across languages and fonts
+          </li>
+          <li>
+            <strong>Lazy Parsing:</strong> Avoids heavy upfront computation on
+            large files
+          </li>
+          <li>
+            <strong>Fallback Mechanisms:</strong> Maintains functionality on
+            unstructured PDFs
           </li>
         </ul>
 
-        <h3>Search Workflow and Execution Flow</h3>
-        <ol>
-          <li>
-            <strong>Preprocessing Phase:</strong>
-            <p>
-              Upon loading or opening a document, Acrobat parses the text
-              content, normalizes encodings (e.g., Unicode), and builds the
-              inverted index in memory or on disk, depending on system
-              constraints. This preprocessing phase runs in linear time relative
-              to the number of words in the document, O(n), where n is the total
-              token count.
-            </p>
-          </li>
-          <li>
-            <strong>Query Execution Phase:</strong>
-            <p>
-              For simple term-based queries, the inverted index is consulted
-              directly to retrieve all matching positions in near-constant time
-              (O(1) or O(log n), depending on the implementation). For complex
-              or partial matches (e.g., wildcards, stemming), Acrobat falls back
-              on advanced string matching, scanning relevant text blocks using
-              efficient sublinear algorithms.
-            </p>
-          </li>
-          <li>
-            <strong>Result Presentation:</strong>
-            <p>
-              The matched terms are highlighted in context, with navigation and
-              filtering options for user refinement. Results update dynamically
-              as users modify their queries.
-            </p>
-          </li>
-        </ol>
-
-        <h3>Challenges and Benefits</h3>
         <p>
-          The primary challenge lies in balancing performance with memory and
-          storage efficiency, particularly for large or scanned documents
-          containing OCR-generated text. Acrobat handles these with selective
-          indexing, background parsing, and persistent caching strategies.
+          <strong>Time Complexity</strong><br />
+          <code>Index Build: O(n)</code><br />
+          <code>Query Lookup: O(1) to O(log n)</code>
         </p>
-        <p>The benefits of this architecture include:</p>
-        <ul>
-          <li>
-            <strong>Speed:</strong> Indexed searches return results
-            instantaneously, even in multi-hundred-page documents.
-          </li>
-          <li>
-            <strong>Accuracy:</strong> Encoding normalization and intelligent
-            tokenization ensure robust handling of multilingual content and
-            non-standard formatting.
-          </li>
-          <li>
-            <strong>Scalability:</strong> The approach supports live search
-            across multiple documents and can be extended for enterprise-level
-            batch processing in Document Cloud solutions.
-          </li>
-        </ul>
-
-        <h3>Summary of Design Techniques and Performance</h3>
-        <ul>
-          <li>
-            <strong>Inverted Index:</strong> Enables direct lookup of words and
-            phrases with minimal latency.
-          </li>
-          <li>
-            <strong>String Matching Algorithms:</strong> Supports dynamic,
-            pattern-based queries with optimized character comparisons.
-          </li>
-          <li>
-            <strong>Time Complexity:</strong>
-            <ul>
-              <li>Index Build: O(n) for n words in the document.</li>
-              <li>
-                Search Query: O(1) to O(log n) for index-based retrieval;
-                sublinear to linear for pattern matching.
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Space Complexity:</strong> Linear with respect to document
-            size, optimized through data compression and lazy loading.
-          </li>
-        </ul>
 
         <p>
-          This architecture ensures that Adobe Acrobat delivers a fast,
-          reliable, and scalable search experience — a critical feature for
-          users navigating today’s vast volumes of digital content.
+          <strong>Space Complexity</strong><br />
+          <code
+            >Linear O(n), where n is the number of unique terms and positions
+            stored</code
+          >
         </p>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
-          alt="Trie Structure"
-        />
+
+        <p>
+          This architecture ensures that PDF viewers can deliver a search
+          experience that is both fast and scalable — vital for workflows where
+          users depend on instant access to relevant content across dense and
+          lengthy documents.
+        </p>
+        <figure>
+          <img
+            src="https://i0.wp.com/spotintelligence.com/wp-content/uploads/2023/10/inverted-index.png?resize=1024%2C576&ssl=1"
+            alt="Inverted Index"
+            style="display: block; margin: auto"
+          />
+          <figcaption>Inverted Index [6]</figcaption>
+        </figure>
         <a
-          href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+          href="https://spotintelligence.com/2023/10/30/inverted-indexing//"
           target="_blank"
           >Code Implementation</a
         >
@@ -637,7 +669,7 @@
           />
           <figcaption>
             Huffman tree generated from the exact frequencies of the text "this
-            is an example of a huffman tree". [3]
+            is an example of a huffman tree". [6]
           </figcaption>
         </figure>
 
@@ -670,7 +702,7 @@
           TeX typesetting system. This method models line breaking as a
           <em>global optimization problem</em> and uses
           <strong>Dynamic Programming</strong> to find the sequence of line
-          breaks that yields the lowest "badness" score — a penalty metric based
+          breaks that yields the lowest "badness" score a penalty metric based
           on whitespace irregularity and line length deviation. A
           <strong>DP grid</strong> (or table) is computed where each entry
           tracks the minimal cumulative penalty for wrapping lines up to a
@@ -787,6 +819,7 @@
             Bloom Filter of configurable size
           </li>
         </ul>
+        <!--
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Trie_example_en.svg/1280px-Trie_example_en.svg.png"
           alt="Trie Structure"
@@ -796,7 +829,7 @@
           target="_blank"
           >Code Implementation</a
         >
-      </div>
+      --></div>
     </details>
 
     <details class="business-case">
@@ -1135,7 +1168,6 @@
         </p>
 
         <p>
-          <strong>Why This Is a Strong Business Case:</strong><br />
           Detecting scene boundaries is non-trivial. A hard cut may have a sharp
           histogram or pixel difference, but soft transitions like pans, fades,
           or camera angle shifts may not show dramatic frame-level change. A
@@ -1237,12 +1269,45 @@
             >Does the Command Pattern Require Undo? by Zoran Horvat</a
           >
         </li>
+        <li>
+          <a
+            href="https://www.geeksforgeeks.org/topological-sorting/"
+            target="_blank"
+            >Topological Sorting - GeeksforGeeks</a
+          >
+        </li>
 
         <li>
           <a
             href="https://medium.com/@konduruharish/topological-sort-in-typescript-and-c-6d5ecc4bad95"
             target="_blank"
             >Topological Sort — In typescript and C#</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://en.wikipedia.org/wiki/Inverted_index?utm_source=chatgpt.com#cite_note-3"
+            target="_blank"
+            >Inverted Index - Wikipedia</a
+          >
+        </li>
+
+        <li>
+          <a href="https://dl.acm.org/doi/10.1145/296854.277632" target="_blank"
+            >Zobel, Justin; Moffat, Alistair; Ramamohanarao, Kotagiri (December
+            1998). "Inverted files versus signature files for text indexing".
+            ACM Transactions on Database Systems. 23 (4). New York: Association
+            for Computing Machinery: 453–490. doi:10.1145/296854.277632. S2CID
+            7293918</a
+          >
+        </li>
+
+        <li>
+          <a
+            href="https://spotintelligence.com/2023/10/30/inverted-indexing/"
+            target="_blank"
+            >How To Implement Inverted Indexing</a
           >
         </li>
 
