@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Implementations | Adobe Portfolio</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Code Implementation</h1>
+      <p class="tagline">
+        Technical Portfolio: Data Structures & Algorithms in Adobe Products
+      </p>
+      <a href="../index.html" class="back-link">&larr; Back to Portfolio</a>
+    </header>
+
+    <!-- Sample Business Case 1 -->
+    <section class="code-section">
+      <details open>
+        <summary>1. Fast Undo-Redo Stack (All Creative Suite Apps)</summary>
+        <p>
+          This implementation uses a two-stack approach for efficient undo-redo
+          operations.
+        </p>
+        <pre><code class="language-python">class UndoRedo:
+    def __init__(self):
+        self.undo_stack = []
+        self.redo_stack = []
+
+    def do_action(self, action):
+        self.undo_stack.append(action)
+        self.redo_stack.clear()
+
+    def undo(self):
+        if self.undo_stack:
+            action = self.undo_stack.pop()
+            self.redo_stack.append(action)
+            return action
+
+    def redo(self):
+        if self.redo_stack:
+            action = self.redo_stack.pop()
+            self.undo_stack.append(action)
+            return action</code></pre>
+      </details>
+    </section>
+
+    <footer>&copy; 2025 Your Name | Adobe Portfolio Supplement</footer>
+  </body>
+</html>
